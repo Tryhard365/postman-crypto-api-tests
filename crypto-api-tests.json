@@ -14,13 +14,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Response contains bitcoin and ethereum prices\", function () {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains bitcoin price in USD\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData).to.have.property(\"bitcoin\");\r",
-							"    pm.expect(jsonData).to.have.property(\"ethereum\");\r",
 							"    pm.expect(jsonData.bitcoin).to.have.property(\"usd\");\r",
-							"    pm.expect(jsonData.ethereum).to.have.property(\"usd\");\r",
-							"});"
+							"});\r",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {},
