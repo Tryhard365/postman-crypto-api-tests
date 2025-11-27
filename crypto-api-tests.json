@@ -115,9 +115,56 @@
 		},
 		{
 			"name": "Get Ethereum Price",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains ethereum price in USD\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"ethereum\");\r",
+							"    pm.expect(jsonData.ethereum).to.have.property(\"usd\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd",
+					"protocol": "https",
+					"host": [
+						"api",
+						"coingecko",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"simple",
+						"price"
+					],
+					"query": [
+						{
+							"key": "ids",
+							"value": "ethereum"
+						},
+						{
+							"key": "vs_currencies",
+							"value": "usd"
+						}
+					]
+				}
 			},
 			"response": []
 		},
