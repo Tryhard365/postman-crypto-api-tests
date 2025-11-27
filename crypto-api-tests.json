@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "255d6a18-beb4-4a8f-88a6-d7489d24a0c6",
+		"name": "Crypto API Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48633066",
+		"_collection_link": "https://michade365-4152560.postman.co/workspace/API-Testing-%E2%80%93-Crypto-Prices~98a6036f-8d82-4f28-a505-5f3ca2785744/collection/48633066-255d6a18-beb4-4a8f-88a6-d7489d24a0c6?action=share&source=collection_link&creator=48633066"
+	},
+	"item": [
+		{
+			"name": "Get Bitcoin Price",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response contains bitcoin and ethereum prices\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"bitcoin\");\r",
+							"    pm.expect(jsonData).to.have.property(\"ethereum\");\r",
+							"    pm.expect(jsonData.bitcoin).to.have.property(\"usd\");\r",
+							"    pm.expect(jsonData.ethereum).to.have.property(\"usd\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
+					"protocol": "https",
+					"host": [
+						"api",
+						"coingecko",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"simple",
+						"price"
+					],
+					"query": [
+						{
+							"key": "ids",
+							"value": "bitcoin"
+						},
+						{
+							"key": "vs_currencies",
+							"value": "usd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Invalid Coin - Negative Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is empty for invalid coin\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(Object.keys(jsonData).length).to.equal(0);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.coingecko.com/api/v3/simple/price?ids=invalidcoin123&vs_currencies=usd\n",
+					"protocol": "https",
+					"host": [
+						"api",
+						"coingecko",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"simple",
+						"price"
+					],
+					"query": [
+						{
+							"key": "ids",
+							"value": "invalidcoin123"
+						},
+						{
+							"key": "vs_currencies",
+							"value": "usd\n"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
