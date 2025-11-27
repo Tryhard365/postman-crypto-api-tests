@@ -1,3 +1,4 @@
+[![API Testing](https://github.com/Tryhard365/postman-crypto-api-tests/actions/workflows/api-tests.yml/badge.svg)](https://github.com/Tryhard365/postman-crypto-api-tests/actions/workflows/api-tests.yml)
 # Crypto API Automated Testing Suite
 
 This repo demonstrates automated API tests for Bitcoin [finance:Bitcoin] price endpoints using Postman, Newman CLI, and continuous integration with GitHub Actions.
